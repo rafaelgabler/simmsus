@@ -6,25 +6,25 @@
 
 ##################################################
 #                                                #
-# 	      CONFIGURATION FILE 2		#
+# 	      CONFIGURATION FILE 2		               #
 #                                                #
 # SIMULATION OF THE LONG-TIME BEHAVIOR OF A      #
-# COLLECTION OF SUSPENDED MAGNETIC PARTICLES 	#
-# UNDER A STEADY STATE MAGNETIC FIELD.		#
+# COLLECTION OF SUSPENDED MAGNETIC PARTICLES     #
+# UNDER A STEADY STATE MAGNETIC FIELD.		       #
 #                                                #
-# THIS FILE CONSIDERS THE FOLLOWING COMBINATION	#
-# OF CALCULATION METHODS FOR LONG-RANGE INTERAC-	#
-# TIONS BETWEEN THE PARTICLES:			#
-#						#
-# - MAGNETIC TORQUES: PERIODIC			#
-# - MAGNETIC FORCES: NON-PERIODIC		#
-# - HYDRODYNAMIC INTERACTIONS: NOT CONSIDERED	#
-#						#
-# THE OUTPUT INFORMATION TO BE EXPLORED IN THESE	#
-# SIMULATIONS IS THE EVOLUTION OF THE SUSPENSION	#
-# MAGNETIZATION, WHICH IS RECORDED IN A FILE	#
-# NAMED magnetization.plt			#
-#						#
+# THIS FILE CONSIDERS THE FOLLOWING COMBINATION	 #
+# OF CALCULATION METHODS FOR LONG-RANGE INTERAC- #
+# TIONS BETWEEN THE PARTICLES:			             #
+#						                                     #
+# - MAGNETIC TORQUES: PERIODIC			             #
+# - MAGNETIC FORCES: NON-PERIODIC		             #
+# - HYDRODYNAMIC INTERACTIONS: NOT CONSIDERED	   #
+#						                                     #
+# THE OUTPUT INFORMATION TO BE EXPLORED IN THESE #
+# SIMULATIONS IS THE EVOLUTION OF THE SUSPENSION #
+# MAGNETIZATION, WHICH IS RECORDED IN A FILE	   #
+# NAMED magnetization.plt			                   #
+#						                                     #
 ##################################################
 
 
