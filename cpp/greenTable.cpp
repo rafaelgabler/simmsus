@@ -28,10 +28,15 @@ void greenTable(Configuration config, double sig, double e, int f, int g, double
 
 // auxiliary parameters used to compute these functions
 double RR1,RR2,RR3,RR4,RR7,RR5, SIG2,SIG3,SIG4,SIG5,SIG7;
+double wave = pow(g,(1.0/3.0));
+double twpie =  (2.0 * M_PI / e);
+double cof3pow = ((((pow(3.0,0.5)) * M_PI / e) - (2.0 * M_PI / e)) / 9999.0);
+double cof1pow = ((pow(3.0,0.5) * e * (pow(f,(1.0 / 3.0)))) / 9999.0);
+double sqrtpi = sqrt(M_PI);
 
 for (int i = 0; i < 10000; i++){
 
-    cof1[0][i] = (2.0 + i) * ((pow(3.0,0.5) * e * (pow(f,(1.0 / 3.0)))) / 9999.0);
+    cof1[0][i] = (2.0 + i) * cof1pow;
     cof2[0][i] = cof1[0][i];
 
 // Calculating the powers of all the possible distances between the particles
@@ -52,36 +57,33 @@ for (int i = 0; i < 10000; i++){
 // Computing the functions used to calculate hydrodynamic interactions (in real space)
  	if(ligaih){
  	cof1[1][i] = (0.75  / RR1 + 0.5 / RR3) * erfc(sig * RR1) + (4.0 * SIG7 * RR4 + 3.0 * SIG3 * RR2 - 
-        20.0 * SIG5 * RR2 - 4.50 * sig + 14.0 * SIG3 + sig / RR2) * exp(-SIG2 * RR2) / sqrt(M_PI); 
+        20.0 * SIG5 * RR2 - 4.50 * sig + 14.0 * SIG3 + sig / RR2) * exp(-SIG2 * RR2) / sqrtpi; 
     cof2[1][i] = (0.75 / RR1 - 1.5 / RR3) * erfc(sig * RR1) + (-4.0 * SIG7 * RR4 - 3.0 * SIG3 * RR2 +
-        16.0 * SIG5 * RR2 + 1.50 * sig - 2.0 * SIG3 - 3.0 * sig / RR2) * exp(-SIG2 * RR2) / sqrt(M_PI);
+        16.0 * SIG5 * RR2 + 1.50 * sig - 2.0 * SIG3 - 3.0 * sig / RR2) * exp(-SIG2 * RR2) / sqrtpi;
 	}
 // Computing the functions used to calculate periodic magnetic torques (in real space)	
 	if(tmagper){
 		cof4[0][i] = cof1[0][i]; 	    
- 	    cof4[1][i] = (erfc(sig * RR1)+ ((2.0 * sig * RR1)/(sqrt(M_PI))) * exp(-SIG2 * RR2)) / RR3; 
+ 	    cof4[1][i] = (erfc(sig * RR1)+ ((2.0 * sig * RR1)/(sqrtpi)) * exp(-SIG2 * RR2)) / RR3; 
 	    cof5[0][i] =  cof1[0][i];
-		cof5[1][i] = (3.0 * erfc(sig * RR1) + (((2.0 * sig * RR1) / (sqrt(M_PI))) * (3.0 + (2.0 * SIG2 * RR2)) * exp(-SIG2 * RR2))) / RR5;		
+		cof5[1][i] = (3.0 * erfc(sig * RR1) + (((2.0 * sig * RR1) / (sqrtpi)) * (3.0 + (2.0 * SIG2 * RR2)) * exp(-SIG2 * RR2))) / RR5;		
     }
 // Computing the functions used to calculate periodic magnetic forces (in real space)	
 	if(fmagper){
 		cof6[0][i] = cof1[0][i];
-	    cof6[1][i] = (15.0 * erfc(sig * RR1) + ((2.0 * sig * RR1) / (sqrt(M_PI))) * (15.0 + (10.0 * SIG2 * RR2 + 4.0 * SIG4 * RR4)) * exp(-SIG2 * RR2)) / RR7;		
+	    cof6[1][i] = (15.0 * erfc(sig * RR1) + ((2.0 * sig * RR1) / (sqrtpi)) * (15.0 + (10.0 * SIG2 * RR2 + 4.0 * SIG4 * RR4)) * exp(-SIG2 * RR2)) / RR7;		
 	}
 
 // Same procedure done now for the reciprocal space
-
 // Calculating all possible wave numbers
 
-	if(pow(g,(1.0/3.0)) == 5.0){
-	    cof3[0][i] = (2.0 * M_PI / e) + ((i) * (((4.0*(pow(3.0,0.5)) * M_PI / e ) - (2.0 * M_PI / e)) / 9999.0));
+	if(wave == 5.0){
+	    cof3[0][i] = twpie + ((i) * 4.0 * cof3pow) ;
+	}else if(wave == 3.0){
+	    cof3[0][i] = twpie + ((i) * 2.0 * cof3pow);
 	}
 
-	if(pow(g,(1.0/3.0)) == 3.0){
-	    cof3[0][i] = (2.0 * M_PI / e) + ((i) * (((2.0*(pow(3.0,0.5)) * M_PI / e) - (2.0 * M_PI / e)) / 9999.0));
-	}
 // Determining the 2th and 4th powers of these possible wave numbers
-
 	RR2 = pow(cof3[0][i],2.0);
 	RR4 = pow(cof3[0][i],4.0);
 
