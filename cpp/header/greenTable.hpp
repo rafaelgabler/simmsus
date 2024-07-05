@@ -22,10 +22,26 @@
 */
 #ifndef SRC_HEADERS_GREENTABLE_HPP_
 #define SRC_HEADERS_GREENTABLE_HPP_
-#include <math.h>
+
 #include <header/config.hpp>
 
-void greenTable(Configuration config, double sig, double e, int f, int g, double y, double **cof1,
-            double **cof2, double **cof3, double **cof4, double **cof5, double **cof6, double **cof7, double **cof8);
+void greenTableLigaihWave3(double sig, double e, int f, double wave, double y, double **cof1,
+            double **cof2, double **cof3);
+
+void greenTableLigaihWave5(double sig, double e, int f, double wave, double y, double **cof1,
+            double **cof2, double **cof3);
+
+void greenTableTmagper3(double sig, double e, int f, double wave, double y, double **cof1,
+            double **cof2, double **cof3, double **cof4, double **cof5, double **cof7);
+
+void greenTableTmagper5(double sig, double e, int f, double wave, double y, double **cof1,
+            double **cof2, double **cof3, double **cof4, double **cof5, double **cof7);
+
+void greenTableFmagper3(double sig, double e, int f, double wave, double y, double **cof1,
+            double **cof2, double **cof3, double **cof4, double **cof6, double **cof8);
+
+void greenTableFmagper5(double sig, double e, int f, double wave, double y, double **cof1,
+            double **cof2, double **cof3, double **cof4, double **cof6, double **cof8);
+
 
 #endif /* SRC_HEADERS_CONFIG_HPP_ */
