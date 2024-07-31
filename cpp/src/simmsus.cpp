@@ -18,8 +18,10 @@
 #include <particleDistribution.hpp>
 #include <boxSize.hpp>
 #include <greenTable.hpp>
+#include <brownian.hpp>
+#include <repulsion.hpp>
 
-int main (int argc, char **argv){
+int main(int argc, char **argv){
 
 //Read the Input File and Create the Object
 Configuration configuration(argv[1]);
@@ -73,12 +75,9 @@ diarand = new double[totalRealParticle];
 //1012 FORMAT(E11.4e2,3x,E11.4e2,3x,E11.4e2,3x,E11.4e2,3x,E11.4e2,3x,E11.4e2)
 //2024 FORMAT(E11.4e2,3x,E11.4e2,3x,E11.4e2,3x,E11.4e2,3x,E11.4e2,3x,E11.4e2,3x,E11.4e2,3x,E11.4e2,3x,E11.4e2)
 
-
-
 if(configuration.getAccounthi() || configuration.getPmf() || configuration.getPmt()){
     periodicity = true;
 }
-
 
 // Defining the size of the particles
 
@@ -190,16 +189,25 @@ for(int k = iter; k < auxiliar_continua; k++){
         }        
 }
 
-// Calculating Brownian forces and torques 
-
-if(browniano){
- brownian();
+// Calculating Brownian forces and torques
+if(configuration.getBm()){
+    brownian(configuration.getSedimentation(), configuration.getTurnonshrate(), configuration.getSte());
 }
 
 // Calculating gravitational forces
-
-if(gravidade){
- gravity();
+for(j = 0; j < numRealizations; j++){
+        for(i = 0; i < numParticles; i++){    
+            FORCAS(2,j,i,0)=0.0;
+            FORCAS(2,j,i,1)=0.0;
+            FORCAS(2,j,i,2)=0.0;
+        }
+    }
+if(configuration.getSedimentation()){
+    for(j = 0; j < numRealizations; j++){
+        for(i = 0; i < numParticles; i++){
+            FORCAS(2,j,i,2)= pow(-beta(j,i),3.0);
+        }
+    }
 }
 
 // Calculating repulsion forces between all particles and
