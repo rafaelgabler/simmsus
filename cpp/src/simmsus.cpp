@@ -193,13 +193,13 @@ for(int k = iter; k < auxiliar_continua; k++){
 // Calculating Brownian forces and torques 
 
 if(browniano){
- call brownian
+ brownian();
 }
 
 // Calculating gravitational forces
 
 if(gravidade){
- call gravity
+ gravity();
 }
 
 // Calculating repulsion forces between all particles and
@@ -243,7 +243,7 @@ for(j = 0; j < numRealizations; j++){
 // Calculating periodic interactions
 
 if(periodicidade){
-call periodic_interactions
+ periodic_interactions();
 }
 
 // Calculating the particles velocities
@@ -258,8 +258,7 @@ if(!ligaih){
         } 
 }
 else {
-    U=FT
-    endif
+    U=FT;    
 }
 
 // Adding the shear contribution to the velocity of each particle
@@ -271,7 +270,6 @@ if(shear){
         }
     }  
 }
-
 
 //***************************** FLUCTUATION MODE OPTION ***********************************//
 
@@ -290,9 +288,9 @@ if(leito){
  
 for(j = 0; j < numRealizations; j++){
     for(i = 0; i < numParticles; i++){
-        U(j,i,0)=U(j,i,0)-usistema(i,0);
-        U(j,i,1)=U(j,i,1)-usistema(i,1);
-        U(j,i,2)=U(j,i,2)-usistema(i,2);
+        U(j,i,0) -= usistema(i,0);
+        U(j,i,1) -= usistema(i,1);
+        U(j,i,2) -= usistema(i,2);
     }
 } 
 
@@ -344,7 +342,6 @@ for(j = 0; j < numRealizations; j++){
 // step
 
 //  call writting_files(k,k_real)
-  
 
 // SOLUTION OF THE ROTATIONAL MOTION OF THE PARTICLES
 
@@ -353,19 +350,19 @@ if(torque){
 // Calculating long-range magnetic torques on each particle due to particle interaction
 
 if(magpart && !tmagper){
-    call torque_magnetico
+    torque_magnetico();
 }
  
 // Calculating the magnetic torques induced by an external field 
 
  if(externo){
     if(rotating){
-        call rotating_field(alpha, freqcampo*k*dt)
+        rotating_field(alpha, freqcampo*k*dt);
     }else{
         if(oscilacampo){
-            call torque_externo(alpha*campo(k))
+            torque_externo(alpha*campo(k));
         } else {
-            call torque_externo(alpha)
+            torque_externo(alpha);
         }
         }
     }
@@ -379,13 +376,14 @@ if(magpart && !tmagper){
 for(j = 0; j < numRealizations; j++){
     for(i = 0; i < numParticles; i++){
         if(browniano){
-        Tt(j,i,0) = TORQUES(0,j,i,0) + TORQUES(1,j,i,0) + TORQUES(2,j,i,0);
-        Tt(j,i,1) = TORQUES(0,j,i,1) + TORQUES(1,j,i,1) + TORQUES(2,j,i,1);
-        Tt(j,i,2) = TORQUES(0,j,i,2) + TORQUES(1,j,i,2) + TORQUES(2,j,i,2);
-        else
-        Tt(j,i,0) = TORQUES(0,j,i,0) + TORQUES(1,j,i,0); 
-        Tt(j,i,1) = TORQUES(0,j,i,1) + TORQUES(1,j,i,1);
-        Tt(j,i,2) = TORQUES(0,j,i,2) + TORQUES(1,j,i,2); 
+            Tt(j,i,0) = TORQUES(0,j,i,0) + TORQUES(1,j,i,0) + TORQUES(2,j,i,0);
+            Tt(j,i,1) = TORQUES(0,j,i,1) + TORQUES(1,j,i,1) + TORQUES(2,j,i,1);
+            Tt(j,i,2) = TORQUES(0,j,i,2) + TORQUES(1,j,i,2) + TORQUES(2,j,i,2);
+        }
+        else{
+            Tt(j,i,0) = TORQUES(0,j,i,0) + TORQUES(1,j,i,0); 
+            Tt(j,i,1) = TORQUES(0,j,i,1) + TORQUES(1,j,i,1);
+            Tt(j,i,2) = TORQUES(0,j,i,2) + TORQUES(1,j,i,2); 
         }
     }
 }
@@ -414,7 +412,7 @@ else{
 if(shear){
     for(j = 0; j < numRealizations; j++){
         for(i = 0; i < numParticles; i++){
-            W(j,i,0) = W(j,i,0) - shearrate * 0.5;
+            W(j,i,0) -= shearrate * 0.5;
         }
     }
 }
@@ -450,7 +448,7 @@ for(j = 0; j < numRealizations; j++){
             Di(j,i,2) = 0.0;
         }    
         for(i = (numParticles * percentual) + 1; i < numParticles; i++){
-            modulodipolo=(Di(j,i,1)**2.0 + Di(j,i,2)**2.0 + Di(j,i,3)**2.0)**0.5
+            modulodipolo = pow(pow(Di(j,i,0),2.0) + pow(Di(j,i,1),2.0) + pow(Di(j,i,2),2.0),0.5);
             Di(j,i,0) /= modulodipolo;
             Di(j,i,1) /= modulodipolo;
             Di(j,i,2) /= modulodipolo;
@@ -458,7 +456,7 @@ for(j = 0; j < numRealizations; j++){
     }
 else{
     for(i = 0; i < numParticles; i++){
-        modulodipolo=(Di(j,i,1)**2.0 + Di(j,i,2)**2.0 + Di(j,i,3)**2.0)**0.5
+        modulodipolo = pow(pow(Di(j,i,0),2.0) + pow(Di(j,i,1),2.0) + pow(Di(j,i,2),2.0),0.5);
         Di(j,i,0) /= modulodipolo;
         Di(j,i,1) /= modulodipolo;
         Di(j,i,2) /= modulodipolo;
@@ -543,7 +541,6 @@ if(fator){
 //  close(100*numRealizations)
 //  close(300*numRealizations)
 
-
 // Deallocating all matrices and vectors
 
 // deallocate(X, STAT = DeAllocateStatus)
@@ -607,8 +604,6 @@ if(fator){
 // write(*,*) 'End of the processing module...'
 // write(*,*) ''
 // end subroutine main
-
-
 return 0;
 
 }
