@@ -14,37 +14,392 @@
 /**CPP File - Create the Configuration Object With the values from config.yaml input file */
 // The methods are in alphabetical order
 
-#include<config.hpp>
+#include <header/config.hpp>
+#include <iostream>
+#include <fstream>
+#include <sstream>
 #include <string>
-#include <stdio.h>
-#include <yaml.h>
+#include <algorithm>
+
 using namespace std;
 Configuration::Configuration(){ }
 
 Configuration::~Configuration(){ }
 
-Configuration::Configuration(const char *configFile){
+Configuration::Configuration(char *configFile){
 
-FILE *fh = fopen(configFile, "r");
+ifstream infile;
+std::string string, recordName, value;
 
-yaml_parser_t parser;
+infile.open (configFile);
 
-/* Initialize parser */
-if(!yaml_parser_initialize(&parser))
-fputs("Failed to initialize parser!\n", stderr);
-if(fh == NULL)
-fputs("Failed to open file!\n", stderr);
-
-/* Set input file */
-yaml_parser_set_input_file(&parser, fh);
-
-/* CODE HERE */
-
-/* Cleanup */
-yaml_parser_delete(&parser);
-fclose(fh);
-
-
+if (infile.is_open()){
+	while(getline(infile,string)) // To get you all the lines.
+	{
+		istringstream sstream(string);
+		sstream >> recordName >> value;
+		char charStart = recordName.at(0);
+		if (charStart != ' ' || charStart != '#') {
+			if (recordName == "STE"){
+				if(value == "TRUE"){
+					this->ste = true;
+				}else{
+					this->ste = false;
+				}
+				continue;
+			}
+			if (recordName == "MP"){
+				if(value == "TRUE"){
+					this->mp = true;
+				}else{
+					this->mp = false;
+				}
+				continue;
+			}
+			if (recordName == "SDS"){
+				if(value == "TRUE"){
+					this->sds = true;
+				}else{
+					this->sds = false;
+				}
+				continue;
+			}
+			if (recordName == "SEDIMENTATION"){
+				if(value == "TRUE"){
+					this->sedimentation = true;
+				}else{
+					this->sedimentation = false;
+				}
+				continue;
+			}
+			if (recordName == "FLUCMODE"){
+				if(value == "TRUE"){
+					this->flucmode = true;
+				}else{
+					this->flucmode = false;
+				}
+				continue;
+			}
+			if (recordName == "BM"){
+				if(value == "TRUE"){
+					this->bm = true;
+				}else{
+					this->bm = false;
+				}
+				continue;
+			}
+			if (recordName == "ACCOUNTHI"){
+				if(value == "TRUE"){
+					this->accounthi = true;
+				}else{
+					this->accounthi = false;
+				}
+				continue;
+			}
+			if (recordName == "CONTINUEOSIM"){
+				if(value == "TRUE"){
+					this->continueosim = true;
+				}else{
+					this->continueosim = false;
+				}
+				continue;
+			}
+			if (recordName == "PI"){
+				if(value == "TRUE"){
+					this->pi = true;
+				}else{
+					this->pi = false;
+				}
+				continue;
+			}
+			if (recordName == "PMT"){
+				if(value == "TRUE"){
+					this->pmt = true;
+				}else{
+					this->pmt = false;
+				}
+				continue;
+			}
+			if (recordName == "PMF"){
+				if(value == "TRUE"){
+					this->pmf = true;
+				}else{
+					this->pmf = false;
+				}
+				continue;
+			}
+			if (recordName == "RECORDPOSFILE"){
+				if(value == "TRUE"){
+					this->recordposfile = true;
+				}else{
+					this->recordposfile = false;
+				}
+				continue;
+			}
+			if (recordName == "RECORDVELFILE"){
+				if(value == "TRUE"){
+					this->recordvelfile = true;
+				}else{
+					this->recordvelfile = false;
+				}
+				continue;
+			}
+			if (recordName == "RECORDDIPFILE"){
+				if(value == "TRUE"){
+					this->recorddipfile = true;
+				}else{
+					this->recorddipfile = false;
+				}
+				continue;
+			}
+			if (recordName == "OF"){
+				if(value == "TRUE"){
+					this->of = true;
+				}else{
+					this->of = false;
+				}
+				continue;
+			}
+			if (recordName == "TF"){
+				if(value == "TRUE"){
+					this->tf = true;
+				}else{
+					this->tf = false;
+				}
+				continue;
+			}
+			if (recordName == "NUMPART"){				
+				this->numpart = stoi(value);			
+				continue;
+			}
+			if (recordName == "NUMREAL"){				
+				this->numreal = stoi(value);			
+				continue;
+			}
+			if (recordName == "ORDRANDARR"){
+				if(value == "TRUE"){
+					this->ordrandarr = true;
+				}else{
+					this->ordrandarr = false;
+				}
+				continue;
+			}
+			if (recordName == "MIXMAGNONMAGPART"){
+				if(value == "TRUE"){
+					this->mixmagnonmagpart = true;
+				}else{
+					this->mixmagnonmagpart = false;
+				}
+				continue;
+			}
+			if (recordName == "INITIALSPHERAGGR"){
+				if(value == "TRUE"){
+					this->initialspheraggr = true;
+				}else{
+					this->initialspheraggr = false;
+				}
+				continue;
+			}
+			if (recordName == "ORDEREDDIPOLES"){
+				if(value == "TRUE"){
+					this->ordereddipoles = true;
+				}else{
+					this->ordereddipoles = false;
+				}
+				continue;
+			}
+			if (recordName == "MONOPOLIDISP"){
+				if(value == "TRUE"){
+					this->monopolidisp = true;
+				}else{
+					this->monopolidisp = false;
+				}
+				continue;
+			}
+			if (recordName == "VOLUMEFRACPART"){				
+				this->volumefracpart = stod(value);			
+				continue;
+			}
+			if (recordName == "BOXASPECTRATIO"){				
+				this->boxaspectratio = stod(value);			
+				continue;
+			}
+			if (recordName == "PERCENTNONMAGPART"){				
+				this->percentnonmagpart = stod(value);			
+				continue;
+			}
+			if (recordName == "APPLYEXTMAGFIELD"){
+				if(value == "TRUE"){
+					this->applyextmagfield = true;
+				}else{
+					this->applyextmagfield = false;
+				}
+				continue;
+			}
+			if (recordName == "POSEXTFIELD"){				
+				this->posextfield = stod(value);			
+				continue;
+			}
+			if (recordName == "OSCILLATORYFIELD"){
+				if(value == "TRUE"){
+					this->oscillatoryfield = true;
+				}else{
+					this->oscillatoryfield = false;
+				}
+				continue;
+			}
+			if (recordName == "ROTATINGFIELD"){
+				if(value == "TRUE"){
+					this->rotatingfield = true;
+				}else{
+					this->rotatingfield = false;
+				}
+				continue;
+			}
+			if (recordName == "NONLINEARDUFFFIELDEXCI"){
+				if(value == "TRUE"){
+					this->nonlineardufffieldexci = true;
+				}else{
+					this->nonlineardufffieldexci = false;
+				}
+				continue;
+			}
+			if (recordName == "DOUBLEFREQFIELDEXCI"){
+				if(value == "TRUE"){
+					this->doublefreqfieldexci = true;
+				}else{
+					this->doublefreqfieldexci = false;
+				}
+				continue;
+			}
+			if (recordName == "DYNAMICINCRFF"){
+				if(value == "TRUE"){
+					this->dynamicincrff = true;
+				}else{
+					this->dynamicincrff = false;
+				}
+				continue;
+			}
+			if (recordName == "FREQUENCY1MAGFIELD"){				
+				this->frequency1magfield = stod(value);			
+				continue;
+			}
+			if (recordName == "FREQUENCY2AGFIELD"){				
+				this->frequency2magfield = stod(value);			
+				continue;
+			}
+			if (recordName == "C1PARDUFFEXC"){				
+				this->c1parduffexc = stod(value);			
+				continue;
+			}
+			if (recordName == "C2PARDUFFEXC"){				
+				this->c2parduffexc = stod(value);			
+				continue;
+			}
+			if (recordName == "C3PARDUFFEXC"){				
+				this->c3parduffexc = stod(value);			
+				continue;
+			}
+			if (recordName == "C4PARDUFFEXC"){				
+				this->c4parduffexc = stod(value);			
+				continue;
+			}
+			if (recordName == "MAXFREQDYNINCR"){				
+				this->maxfreqdynincr = stod(value);			
+				continue;
+			}
+			if (recordName == "NUMBERINTDYNINCR"){				
+				this->numberintdynincr = stod(value);			
+				continue;
+			}
+			if (recordName == "TURNONSHRATE"){
+				if(value == "TRUE"){
+					this->turnonshrate = true;
+				}else{
+					this->turnonshrate = false;
+				}
+				continue;
+			}
+			if (recordName == "OSCILLATORYSH"){
+				if(value == "TRUE"){
+					this->oscillatorysh = true;
+				}else{
+					this->oscillatorysh = false;
+				}
+				continue;
+			}
+			if (recordName == "DYNINCRSHRATE"){
+				if(value == "TRUE"){
+					this->dynincrshrate = true;
+				}else{
+					this->dynincrshrate = false;
+				}
+				continue;
+			}
+			if (recordName == "DIMENSIONLESSSHRATE"){				
+				this->dimensionlessshrate = stod(value);			
+				continue;
+			}
+			if (recordName == "FREQUENCYOSCILLSH"){				
+				this->frequencyoscillsh = stod(value);			
+				continue;
+			}
+			if (recordName == "LAMBDA"){				
+				this->lambda = stod(value);			
+				continue;
+			}
+			if (recordName == "ALPHA"){				
+				this->alpha = stod(value);			
+				continue;
+			}
+			if (recordName == "BROWNIANPECLETNUM"){				
+				this->brownianpecletnum = stod(value);			
+				continue;
+			}
+			if (recordName == "TRANSLATIONALSTOKESNUM"){				
+				this->translationalstokesnum = stod(value);			
+				continue;
+			}
+			if (recordName == "SIMULATIONTIME"){				
+				this->simulationtime = stod(value);			
+				continue;
+			}
+			if (recordName == "STEPSTORINGRESULTS"){				
+				this->stepstoringresults = stod(value);			
+				continue;
+			}
+			if (recordName == "CONTINUEFITNUM"){				
+				this->continuefitnum = stod(value);			
+				continue;
+			}
+			if (recordName == "STATANALYSIS"){
+				if(value == "TRUE"){
+					this->statanalysis = true;
+				}else{
+					this->statanalysis = false;
+				}
+				continue;
+			}
+			if (recordName == "CALCSTRUCTFACTOR"){
+				if(value == "TRUE"){
+					this->calcstructfactor = true;
+				}else{
+					this->calcstructfactor = false;
+				}
+				continue;
+			}
+			if (recordName == "PRINTLOCALMAPSPHI"){
+				if(value == "TRUE"){
+					this->printlocalmapsphi = true;
+				}else{
+					this->printlocalmapsphi = false;
+				}
+				continue;
+			}
+		}		
+	}	
+	infile.close();
+}
 }
 
 
@@ -68,11 +423,6 @@ void Configuration::setBm(bool s_bm)
 	bm = s_bm;
 }
 
-void Configuration::setBm(bool s_bm)
-{
-	bm = s_bm;
-}
-
 void Configuration::setBoxaspectratio(double s_boxaspectratio)
 {
 	boxaspectratio = s_boxaspectratio;
@@ -83,6 +433,11 @@ void Configuration::setBrownianpecletnum(double s_brownianpecletnum)
 	brownianpecletnum = s_brownianpecletnum;
 }
 
+void Configuration::setDynincrshrate(bool s_dynincrshrate)
+{
+	dynincrshrate = s_dynincrshrate;
+}
+
 void Configuration::setC1parduffexc(double s_c1parduffexc)
 {
 	c1parduffexc = s_c1parduffexc;
@@ -131,71 +486,6 @@ void Configuration::setDoublefreqfieldexci(bool s_doublefreqfieldexci)
 void Configuration::setDynamicincrff(bool s_dynamicincrff)
 {
 	dynamicincrff = s_dynamicincrff;
-}
-
-void Configuration::setDynincrshrate(bool s_dynincrshrate)
-{
-	dynincrshrate = s_dynincrshrate;
-}
-
-void Configuration::setC1parduffexc(double s_c1parduffexc)
-{
-	c1parduffexc = s_c1parduffexc;
-}
-
-void Configuration::setC2parduffexc(double s_c2parduffexc)
-{
-	c2parduffexc = s_c2parduffexc;
-}
-
-void Configuration::setC3parduffexc(double s_c3parduffexc)
-{
-	c3parduffexc = s_c3parduffexc;
-}
-
-void Configuration::setC4parduffexc(double s_c4parduffexc)
-{
-	c4parduffexc = s_c4parduffexc;
-}
-
-void Configuration::setC4parduffexc(double s_c4parduffexc)
-{
-	c4parduffexc = s_c4parduffexc;
-}
-
-void Configuration::setCalcstructfactor(bool s_calcstructfactor)
-{
-	calcstructfactor = s_calcstructfactor;
-}
-
-void Configuration::setContinuefitnum(double s_continuefitnum)
-{
-	continuefitnum = s_continuefitnum;
-}
-
-void Configuration::setContinueosim(bool s_continueosim)
-{
-	continueosim = s_continueosim;
-}
-
-void Configuration::setDimensionlessshrate(double s_dimensionlessshrate)
-{
-	dimensionlessshrate = s_dimensionlessshrate;
-}
-
-void Configuration::setDoublefreqfieldexci(bool s_doublefreqfieldexci)
-{
-	doublefreqfieldexci = s_doublefreqfieldexci;
-}
-
-void Configuration::setDynamicincrff(bool s_dynamicincrff)
-{
-	dynamicincrff = s_dynamicincrff;
-}
-
-void Configuration::setDynincrshrate(bool s_dynincrshrate)
-{
-	dynincrshrate = s_dynincrshrate;
 }
 
 void Configuration::setFlucmode(bool s_flucmode)

@@ -14,6 +14,9 @@
 /**Header File - Create the Configuration Object With the values from config.yaml input file */
 #ifndef SRC_HEADERS_CONFIG_HPP_
 #define SRC_HEADERS_CONFIG_HPP_
+
+#include <string>
+
 class Configuration {
 
 	private:
@@ -59,9 +62,10 @@ class Configuration {
         //SIMULATION QUANTITIES
 
         //NUMBER OF PARTICLES
-        double numpart;
+        int numpart;
         //NUMBER OF REALIZATIONS
-        double numreal;
+        int numreal;
+        
 
         //INITIAL CONFIGURATION INFORMATION
 
@@ -167,6 +171,8 @@ class Configuration {
 		Configuration();
 
 		~Configuration();
+        
+        Configuration(char *configFile);
 
 		//Getters and Setters
 		void setSte(bool s_ste);
@@ -217,10 +223,10 @@ class Configuration {
         void setTf(bool s_tf);
         bool getTf(){ return tf;}
 
-        void setNumpart(double s_numpart);
+        void setNumpart(int s_numpart);
         double getNumpart(){ return numpart;}
         
-        void setNumreal(double s_numreal);
+        void setNumreal(int s_numreal);
         double getNumreal(){ return numreal;}
         
         void setOrdrandarr(bool s_ordrandarr);
@@ -293,20 +299,14 @@ class Configuration {
         double getNumberintdynincr(){ return numberintdynincr;}   
 
         void setTurnonshrate(bool s_turnonshrate);
-        bool getTurnonshrate(){ return turnonshrate;}   
-
-        void setTurnonshrate(bool s_turnonshrate);
-        bool getTurnonshrate(){ return turnonshrate;}   
+        bool getTurnonshrate(){ return turnonshrate;}          
 
         void setOscillatorysh(bool s_oscillatorysh);
         bool getOscillatorysh(){ return oscillatorysh;}   
         
         void setDynincrshrate(bool s_dynincrshrate);
         bool getDynincrshrate(){ return dynincrshrate;}   
-       
-        void setNumberintdynincr(double s_numberintdynincr);
-        double getNumberintdynincr(){ return numberintdynincr;}
-
+        
         void setDimensionlessshrate(double s_dimensionlessshrate);
         double getDimensionlessshrate(){ return dimensionlessshrate;}
 
@@ -345,5 +345,6 @@ class Configuration {
 
         void setPrintlocalmapsphi(bool s_printlocalmapsphi);
         bool getPrintlocalmapsphi(){ return printlocalmapsphi;}
+               
 };
 #endif /* SRC_HEADERS_CONFIG_HPP_ */
