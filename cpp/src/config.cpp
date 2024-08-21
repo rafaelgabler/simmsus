@@ -309,7 +309,7 @@ if (infile.is_open()){
 				continue;
 			}
 			if (recordName == "NUMBERINTDYNINCR"){				
-				this->numberintdynincr = stod(value);			
+				this->numberintdynincr = stoi(value);			
 				continue;
 			}
 			if (recordName == "TURNONSHRATE"){
@@ -365,11 +365,11 @@ if (infile.is_open()){
 				continue;
 			}
 			if (recordName == "STEPSTORINGRESULTS"){				
-				this->stepstoringresults = stod(value);			
+				this->stepstoringresults = stoi(value);			
 				continue;
 			}
 			if (recordName == "CONTINUEFITNUM"){				
-				this->continuefitnum = stod(value);			
+				this->continuefitnum = stoi(value);			
 				continue;
 			}
 			if (recordName == "STATANALYSIS"){
@@ -423,7 +423,7 @@ void Configuration::setBm(bool s_bm)
 	bm = s_bm;
 }
 
-void Configuration::setBoxaspectratio(double s_boxaspectratio)
+void Configuration::setBoxaspectratio(int s_boxaspectratio)
 {
 	boxaspectratio = s_boxaspectratio;
 }
@@ -463,7 +463,7 @@ void Configuration::setCalcstructfactor(bool s_calcstructfactor)
 	calcstructfactor = s_calcstructfactor;
 }
 
-void Configuration::setContinuefitnum(double s_continuefitnum)
+void Configuration::setContinuefitnum(int s_continuefitnum)
 {
 	continuefitnum = s_continuefitnum;
 }
@@ -543,7 +543,7 @@ void Configuration::setNonlineardufffieldexci(bool s_nonlineardufffieldexci)
 	nonlineardufffieldexci = s_nonlineardufffieldexci;
 }
 
-void Configuration::setNumberintdynincr(double s_numberintdynincr)
+void Configuration::setNumberintdynincr(int s_numberintdynincr)
 {
 	numberintdynincr = s_numberintdynincr;
 }
@@ -663,7 +663,7 @@ void Configuration::setSte(bool s_ste)
 	ste = s_ste;
 }
 
-void Configuration::setStepstoringresults(double s_stepstoringresults)
+void Configuration::setStepstoringresults(int s_stepstoringresults)
 {
 	stepstoringresults = s_stepstoringresults;
 }
@@ -687,5 +687,3 @@ void Configuration::setVolumefracpart(double s_volumefracpart)
 {
 	volumefracpart = s_volumefracpart;
 }
-
-

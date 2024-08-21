@@ -85,7 +85,7 @@ class Configuration {
         //VOLUME FRACTION OF PARTICLES
         double volumefracpart;
         //BOX ASPECT RATIO
-        double boxaspectratio;
+        int boxaspectratio;
         //PERCENTAGE OF NON-MAGNETIC PARTICLES
         double percentnonmagpart;
 
@@ -120,7 +120,7 @@ class Configuration {
         //MAX FREQUENCY FOR DYNAMICAL INCREASE
         double maxfreqdynincr;
         //NUMBER OF INTERVALS FOR DYN. INCREASE
-        double numberintdynincr;
+        int numberintdynincr;
 
         //SHEAR RATE INFORMATION
 
@@ -153,9 +153,9 @@ class Configuration {
         //NUMERICAL TIME-STEP
         double numtimestep;
         //STEP FOR STORING THE RESULTS
-        double stepstoringresults;
+        int stepstoringresults;
         //CONTINUE FROM ITERACTION NUMBER
-        double continuefitnum;
+        int continuefitnum;
 
         //OPTIONAL DATA TREATMENT
 
@@ -247,8 +247,8 @@ class Configuration {
         void setVolumefracpart(double s_volumefracpart);
         double getVolumefracpart(){ return volumefracpart;}
         
-        void setBoxaspectratio(double s_boxaspectratio);
-        double getBoxaspectratio(){ return boxaspectratio;}
+        void setBoxaspectratio(int s_boxaspectratio);
+        int getBoxaspectratio(){ return boxaspectratio;}
         
         void setPercentnonmagpart(double s_percentnonmagpart);
         double getPercentnonmagpart(){ return percentnonmagpart;}        
@@ -295,8 +295,8 @@ class Configuration {
         void setMaxfreqdynincr(double s_maxfreqdynincr);
         double getMaxfreqdynincr(){ return maxfreqdynincr;}   
 
-        void setNumberintdynincr(double s_numberintdynincr);
-        double getNumberintdynincr(){ return numberintdynincr;}   
+        void setNumberintdynincr(int s_numberintdynincr);
+        int getNumberintdynincr(){ return numberintdynincr;}   
 
         void setTurnonshrate(bool s_turnonshrate);
         bool getTurnonshrate(){ return turnonshrate;}          
@@ -331,11 +331,11 @@ class Configuration {
         void setNumtimestep(double s_numtimestep);
         double getNumtimestep(){ return numtimestep;}
 
-        void setStepstoringresults(double s_stepstoringresults);
-        double getStepstoringresults(){ return stepstoringresults;}
+        void setStepstoringresults(int s_stepstoringresults);
+        int getStepstoringresults(){ return stepstoringresults;}
 
-        void setContinuefitnum(double s_continuefitnum);
-        double getContinuefitnum(){ return continuefitnum;}
+        void setContinuefitnum(int s_continuefitnum);
+        int getContinuefitnum(){ return continuefitnum;}
 
         void setStatanalysis(bool s_statanalysis);
         bool getStatanalysis(){ return statanalysis;}
