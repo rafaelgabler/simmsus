@@ -13,7 +13,7 @@
 
 #include <iostream>
 #include <iomanip>
-#include <randomic.hpp>
+#include <header/randomic.hpp>
 #include <random>
 #include <math.h>
 

@@ -22,8 +22,14 @@ extern int numParticles;
 extern int num;
 extern double l;
 extern double h;
-extern double *diarand;
 extern int totalRealParticle;
-
+extern int numBoxes;
+extern int numRecBoxes;
+extern double shearratei; //= shearrate; //! shear-rate -> Arquivo de configuracao
+extern double per; // = (4.0 / 3.0) * Pe; //! rotational Peclet number -> Arquivo de configuracao
+extern double phi;
+extern bool periodicity;
+extern double *diam;
+extern double *betaVec;
 
 #endif /* SRC_HEADERS_GLOBALS_HPP_ */
