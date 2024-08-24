@@ -19,6 +19,7 @@
 ************************/
 #include <math.h>
 #include <header/globals.hpp>
+#include <header/boxSize.hpp>
 
 void boxSize(int N, double phi, int razao, bool initialAgregate){
 

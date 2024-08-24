@@ -25,23 +25,27 @@
 
 #include <header/config.hpp>
 
-void greenTableLigaihWave3(double sig, double e, int f, double wave, double y, double **cof1,
-            double **cof2, double **cof3);
+void greenTableLigaihWave3(int nGreen, double sig, double e, int f, double wave, double y, double *cof01, double *cof11,
+            double *cof02, double *cof12, double *cof03, double *cof13);
 
-void greenTableLigaihWave5(double sig, double e, int f, double wave, double y, double **cof1,
-            double **cof2, double **cof3);
+void greenTableLigaihWave5(int nGreen, double sig, double e, int f, double wave, double y, double *cof01, double *cof11,
+            double *cof02, double *cof12, double *cof03, double *cof13);
 
-void greenTableTmagper3(double sig, double e, int f, double wave, double y, double **cof1,
-            double **cof2, double **cof3, double **cof4, double **cof5, double **cof7);
+void greenTableTmagper3(int nGreen, double sig, double e, int f, double wave, double y, double *cof01,
+            double *cof11, double *cof02, double *cof12, double *cof03, double *cof13, double *cof04, 
+			double *cof14, double *cof05, double *cof15, double *cof07, double *cof17);
 
-void greenTableTmagper5(double sig, double e, int f, double wave, double y, double **cof1,
-            double **cof2, double **cof3, double **cof4, double **cof5, double **cof7);
+void greenTableTmagper5(int nGreen, double sig, double e, int f, double wave, double y, double *cof01,
+            double *cof11, double *cof02, double *cof12, double *cof03, double *cof13, double *cof04, 
+			double *cof14, double *cof05, double *cof15, double *cof07, double *cof17);
 
-void greenTableFmagper3(double sig, double e, int f, double wave, double y, double **cof1,
-            double **cof2, double **cof3, double **cof4, double **cof6, double **cof8);
+void greenTableFmagper3(int nGreen, double sig, double e, int f, double wave, double y, double *cof01,
+            double *cof11, double *cof02, double *cof12, double *cof03, double *cof13,
+			double *cof06, double *cof16, double *cof08, double *cof18);
 
-void greenTableFmagper5(double sig, double e, int f, double wave, double y, double **cof1,
-            double **cof2, double **cof3, double **cof4, double **cof6, double **cof8);
+void greenTableFmagper5(int nGreen, double sig, double e, int f, double wave, double y, double *cof01,
+            double *cof11, double *cof02, double *cof12, double *cof03, double *cof13,
+			double *cof04, double *cof14, double *cof06, double *cof16, double *cof08, double *cof18);
 
 
 #endif /* SRC_HEADERS_CONFIG_HPP_ */

@@ -32,4 +32,6 @@ extern bool periodicity;
 extern double *diam;
 extern double *betaVec;
 
+
+
 #endif /* SRC_HEADERS_GLOBALS_HPP_ */

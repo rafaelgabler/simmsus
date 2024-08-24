@@ -17,11 +17,13 @@
 #include <header/globals.hpp>
 #include <header/particleDistribution.hpp>
 #include <header/boxSize.hpp>
-// #include <greenTable.hpp>
+#include <header/greenTable.hpp>
 // #include <brownian.hpp>
 // #include <repulsion.hpp>
 // #include <periodicStructure.hpp>
 using namespace std;
+
+
 
 int main(int argc, char **argv){
 
@@ -32,8 +34,10 @@ if (argc < 2){
 //Read the Input File and Create the Object
 
 Configuration configuration(argv[1]);
-
-std::cout << configuration.getSte() << "\n";
+double *cof01,*cof11,*cof02,*cof12,*cof03,
+*cof13,*cof04,*cof14,*cof05,*cof15,*cof06,*cof16,*cof07,
+*cof17,*cof08,*cof18;
+const int nGreen = 10000;
 
 shearratei = configuration.getDynincrshrate(); //! shear-rate -> Arquivo de configuracao
 per = (4.0 / 3.0) * configuration.getBrownianpecletnum(); //! rotational Peclet number -> Arquivo de configuracao
@@ -70,6 +74,99 @@ particleDistribution(configuration.getMonopolidisp(), numRealizations, numPartic
 
 boxSize(numParticles, configuration.getVolumefracpart(), configuration.getBoxaspectratio(), configuration.getInitialspheraggr());
 
+double qsi = 1.0 * (pow(M_PI,0.5)  / (pow(l * l * h,(1.0/3.0))));
+
+
+// Building a table with all the Green-functions
+// And building the periodic structure to compute
+// the Ewald summations
+
+if(periodicity){
+    double wave = pow(nbr,(1.0/3.0));
+    if(wave == 5.0){
+        if(configuration.getAccounthi()){
+            cof01 = new double[nGreen];
+            cof11 = new double[nGreen];
+            cof02 = new double[nGreen];
+            cof12 = new double[nGreen];
+            cof03 = new double[nGreen];
+            cof13 = new double[nGreen];
+            greenTableLigaihWave5(nGreen, qsi, l, nb, wave, h, cof01, cof11, cof02, cof12, cof03, cof13);
+        }else if(configuration.getPmt()){
+            cof01 = new double[nGreen];
+            cof11 = new double[nGreen];
+            cof02 = new double[nGreen];
+            cof12 = new double[nGreen];
+            cof03 = new double[nGreen];
+            cof13 = new double[nGreen];
+            cof04 = new double[nGreen];
+            cof14 = new double[nGreen];
+            cof05 = new double[nGreen];
+            cof15 = new double[nGreen];
+            cof07 = new double[nGreen];
+            cof17 = new double[nGreen];
+            greenTableTmagper5(nGreen, qsi, l, nb, wave, h, cof01, cof11, cof02, cof12, cof03, cof13,
+            cof04, cof14, cof05, cof15, cof07, cof17);
+        }else if(configuration.getPmf()){
+            cof01 = new double[nGreen];
+            cof11 = new double[nGreen];
+            cof02 = new double[nGreen];
+            cof12 = new double[nGreen];
+            cof03 = new double[nGreen];
+            cof13 = new double[nGreen];
+            cof04 = new double[nGreen];
+            cof14 = new double[nGreen];
+            cof06 = new double[nGreen];
+            cof16 = new double[nGreen];
+            cof08 = new double[nGreen];
+            cof18 = new double[nGreen];
+            greenTableFmagper3(nGreen, qsi, l, nb, wave, h, cof01,  cof11, cof02, cof12, cof03, cof13,
+            cof06, cof16, cof08, cof18);
+        }
+    }else if(wave == 3.0){
+        if(configuration.getAccounthi()){
+            cof01 = new double[nGreen];
+            cof11 = new double[nGreen];
+            cof02 = new double[nGreen];
+            cof12 = new double[nGreen];
+            cof03 = new double[nGreen];
+            cof13 = new double[nGreen];
+            greenTableLigaihWave3(nGreen, qsi, l, nb, wave, h, cof01, cof11, cof02, cof12, cof03, cof13);
+        }else if(configuration.getPmt()){
+            cof01 = new double[nGreen];
+            cof11 = new double[nGreen];
+            cof02 = new double[nGreen];
+            cof12 = new double[nGreen];
+            cof03 = new double[nGreen];
+            cof13 = new double[nGreen];
+            cof04 = new double[nGreen];
+            cof14 = new double[nGreen];
+            cof05 = new double[nGreen];
+            cof15 = new double[nGreen];
+            cof07 = new double[nGreen];
+            cof17 = new double[nGreen];
+            greenTableTmagper3(nGreen, qsi, l, nb, wave, h, cof01,  cof11, cof02, cof12, cof03, cof13,
+            cof04, cof14, cof05, cof15, cof07, cof17);
+        }else if(configuration.getPmf()){
+            cof01 = new double[nGreen];
+            cof11 = new double[nGreen];
+            cof02 = new double[nGreen];
+            cof12 = new double[nGreen];
+            cof03 = new double[nGreen];
+            cof13 = new double[nGreen];
+            cof04 = new double[nGreen];
+            cof14 = new double[nGreen];
+            cof06 = new double[nGreen];
+            cof16 = new double[nGreen];
+            cof08 = new double[nGreen];
+            cof18 = new double[nGreen];
+            greenTableFmagper3(nGreen, qsi, l, nb, wave, h, cof01, cof11, cof02, cof12, cof03, cof13,
+            cof06, cof16, cof08, cof18);
+        }
+    }
+}
+ 
+// periodicStructure();
 }
 
 return 0;
