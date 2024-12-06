@@ -252,18 +252,18 @@ end if
 ! interactions.
 
 if(leito)then
-do i=1,N
-usistema(i,1)=sum(U(:,i,1))/rea
-usistema(i,2)=sum(U(:,i,2))/rea
-usistema(i,3)=sum(U(:,i,3))/rea
+do i=1,rea
+usistema(i,1)=sum(U(i,:,1))/N
+usistema(i,2)=sum(U(i,:,2))/N
+usistema(i,3)=sum(U(i,:,3))/N
 end do
 
  !$OMP PARALLEL DO
 do q=1,rea
 do i=1,N
-U(q,i,1)=U(q,i,1)-usistema(i,1)
-U(q,i,2)=U(q,i,2)-usistema(i,2)
-U(q,i,3)=U(q,i,3)-usistema(i,3)
+U(q,i,1)=U(q,i,1)-usistema(q,1)
+U(q,i,2)=U(q,i,2)-usistema(q,2)
+U(q,i,3)=U(q,i,3)-usistema(q,3)
 end do
 end do
  !$OMP END PARALLEL DO

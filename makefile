@@ -17,7 +17,7 @@ SRC-LNX = subroutines.f90 variables.f90 input.f90  \
 # Compiler definition and flags
 
 ENGINE-LNX = ifort
-FLAGS-LNX = -m64 -O2 -qopenmp
+FLAGS-LNX = -m64 -O2 #-qopenmp
 
 # Executable file generation (Linux)
 

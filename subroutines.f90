@@ -67,7 +67,7 @@ allocate(cof1(2,10000))
 allocate(cof2(2,10000))
 allocate(cof3(2,10000))
 if(leito)then
-allocate(usistema(N,3))
+allocate(usistema(rea,3))
 end if
 if(grafmag)then
 allocate(magtempo(3,npast))
