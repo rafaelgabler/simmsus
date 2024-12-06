@@ -393,6 +393,8 @@ end subroutine tabelagreen
 
 subroutine estrutura_periodica
 
+integer auxper(5), auxper2(5), auxper3(5)
+
 pi=acos(-1.0)
 
 ! Creating the lattices indeces in the real space
@@ -559,7 +561,7 @@ subroutine distribui_dipolo(a,b,c)
 
 integer b,c ! b= number of realizations, c= number of particles
 real a(b,c,3) ! Dipoles
-real d,e ! modip
+real d,e ! 
 integer f 
 
 ! If dipoles are distributed in an ordered way
@@ -682,6 +684,8 @@ end subroutine distribui_dipolo
 !*************************************************!
 
 subroutine condicao_inicial
+
+integer auxiliar1, loop, loop2
 
 ! If you have to continue a previous simulation, then get into this "if clause"
 if(continua) then
@@ -1647,6 +1651,10 @@ end subroutine campo_externo
 
 subroutine periodic_interactions
 
+real mobilidade_self(3,3), mobilidade1(3,3), mobilidade2(3,3) 
+real coeficiente1, coeficiente2,coeficiente3, coeficiente4
+real coeficiente5, coeficiente6, coeficiente7, coeficiente8
+
 ! We start by computing first the sums in the real space 
 ! Here, nb denotes the number of physical boxes. This
 ! number can be different from nbr, which denotes the
@@ -2199,8 +2207,9 @@ end subroutine respos
 !*************************************************!
 
 subroutine writting_files(k,k_real)
-integer k
-real k_real
+integer k, teste2
+real k_real, teste1
+
 509 FORMAT(F30.4,F30.4,F30.4,F30.4)
 666 FORMAT(F30.4,F30.4,F30.4,F30.4,F30.4,F30.4,F30.4)
 if(continua)then

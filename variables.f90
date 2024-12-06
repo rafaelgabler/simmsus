@@ -4,28 +4,19 @@ module variables
 
 
 ! INTEGERS (NON ALLOCATABLE)
-integer i,j,k,q,s,a,b,c,d,g
-integer N, auxper(5), auxper2(5), auxper3(5)
+integer i,j,k,q,s,a,b,c,d,g, N
 integer razao,iter,aux_periodico,posicao_campo
-integer nb,nbr,npast,ncor,rea
-integer auxint1,auxint2,auxint3,auxint4
-integer nnr,semente(1),auxiliar1
-integer inteiro, inteiro2, loop, loop2
+integer nb,nbr,npast,ncor,rea, nnr
+integer inteiro, inteiro2
 integer n2,auxiliar_continua,DeAllocateStatus
-integer teste2, nfreq, contfreqinteiro1, contfreqinteiro2, multiplofreq
+integer nfreq, contfreqinteiro1, contfreqinteiro2, multiplofreq
 
 ! REAL (NON ALLOCATABLE)
 real razao2, diferenca_interpol1, diferenca_interpol2
-real diferenca, ajuda, lambda, kreal, aux_real, bifmax
-real derivada1, derivada2, derivada3, trapezio, intervalo
-real coeficiente1, coeficiente2,coeficiente3, coeficiente4
-real coeficiente5, coeficiente6, coeficiente7, coeficiente8
-real modulodipolo,kr2,dt,percentual,qsi, modk, kr
-real mobilidade(3,3),resistencia(3,3), teste_identidade(3,3)
-real mobilidade_self(3,3), mobilidade1(3,3), mobilidade2(3,3) 
-real resistencia_self(3,3), resistencia1(3,3), resistencia2(3,3), pi
-real contri1,contri2,contri3,contri4,contri5,contri6
-real rij(3), rn(3),h2, freqmax,C1, C2, C3, C4, k_real
+real lambda, kreal, aux_real, bifmax
+real derivada1, derivada2, derivada3, intervalo
+real modulodipolo,kr2,dt,percentual,qsi, modk, kr, pi
+real rij(3), rn(3), freqmax,C1, C2, C3, C4, k_real
 real l,h,phi,nr1, nr2, nr3, Pe, Per, ragreg
 real r, alpha2,alpha,xcentro, ycentro, zcentro
 real xmin, xmax, ymin, ymax, zmin, zmax
@@ -33,8 +24,7 @@ real modrij, modrand,auxcont, freq, shearratei
 real termo1,termo2,termo3,termo4,termo5,eps
 real tempo,ti, tf, tpros,dist,difusao
 real reale, reale2, Str, freqcampo, freqbeat
-real n3, modip, shearrate, St
-real teste1, frequencia, umsobreene
+real n3, shearrate, St
 real UMEDIA(3),SIGMA(3), konda(3), knormal(3)
 real k1,k2,k3,k4,g1,g2,g3,g4
 

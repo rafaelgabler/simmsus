@@ -482,21 +482,6 @@ tempototal(k)=k*dt
 end if
 end do
 
-! Computing the integral of M.dH for MHT information (to be fixed)
-!if(grafmag) then
-!do k=2,npast
-!trap(k-1)= ((magtempo(3,k-1)*y(k-1)) + (magtempo(3,k)*y(k)))*dt*0.5
-!end do
-!trapezio=sum(trap)
-!print *,'******************************************************************************'
-!print *,'*                                                                            *'
-!print *,'*                                 MHT REPORT	                              *'
-!print *,'*                                                                            *'
-!print *,'******************************************************************************'
-!write(*,*)''
-!write(*,*)'INTEGRAL OF M.dH:',abs(trapezio)
-!end if
-
 ! Printing local volume fraction maps inside the simulation box
 if(printphi) then
 call campo_phi(rea,k)
