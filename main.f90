@@ -72,6 +72,10 @@ auxt=0.0
 
  call box_size
 
+! Creating the initial particle distribution
+
+ call condicao_inicial
+
 ! Creating the files to write the results
 
 if(.not.continua) then
@@ -99,9 +103,6 @@ if(.not.continua) then
 end if
 end if
 
-! Creating the initial particle distribution
-
- call condicao_inicial
 
 print *,'******************************************************************************'
 print *,'*                                                                            *'
