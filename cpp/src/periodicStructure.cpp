@@ -25,158 +25,91 @@
 * (1986), Abade (2002), Gontijo (2013)            
 *************************************************/
 #include <math.h>
-#include <globals.hpp>
+#include <header/globals.hpp>
+#include <header/constants.hpp>
+#include <header/periodicStructure.hpp>
+#include <iostream>
+using namespace std;
 void periodicStructure(){
-
-double powNb = pow(numBoxes,(1.0/3.0));
-double powNbr = pow(numRecBoxes,(1.0/3.0));
-
+    
 // Creating the lattices indeces in the real space
 
-int auxper = 0;
+int auxper[5]{};
+int auxper2[5]{};
+int auxper3[5]{};
+int auxperi[3]{};
+int auxperi2[3]{};
+int auxperi3[3]{};
 
-if(powNb == 5.0){
-    auxper[0] = 1;
-    auxper[1] = 2;
-    auxper[2] = 3;
-    auxper[3] = 4;
-    auxper[4] = 5;
+int a,b,c,s;
 
-    auxper2[0] = 0;
-    auxper2[1] = 5;
-    auxper2[2] = 10;
-    auxper2[3] = 15;
-    auxper2[4] = 20;
+auxper[0] = 1;
+auxper[1] = 2;
+auxper[2] = 3;
+auxper[3] = 4;
+auxper[4] = 5;
 
-    auxper3[0] = 0;
-    auxper3[1] = 25;
-    auxper3[2] = 50;
-    auxper3[3] = 75;
-    auxper3[4] = 100;
+auxperi[0] = 1;
+auxperi[1] = 2;
+auxperi[2] = 3;
 
-    for(int a = 0; a < powNb; a++){
-        for(int b = 0; b < powNb; b++){
-            for(int c = 0; c < powNb; c++){
+auxper2[0] = 0;
+auxper2[1] = 5;
+auxper2[2] = 10;
+auxper2[3] = 15;
+auxper2[4] = 20;
 
-                // Number of physical boxes
-                double s = auxper3[a] +  auxper2[b] + auxper[c];                
-                ILF[s][0] = a - 3;
-                ILF[s][1] = b - 3;
-                ILF[s][2] = c - 3;
-            }
-        }
-    }
-} else if(powNb == 3.0){
-        auxper[0] = 1;
-        auxper[1] = 2;
-        auxper[2] = 3;
 
-        auxper2[0] = 0;
-        auxper2[1] = 3;
-        auxper2[2] = 6;
+auxperi2[0] = 0;
+auxperi2[1] = 3;
+auxperi2[2] = 6;
 
-        auxper3[0] = 0;
-        auxper3[1] = 9;
-        auxper3[2] = 18;
-    
+auxper3[0] = 0;
+auxper3[1] = 25;
+auxper3[2] = 50;
+auxper3[3] = 75;
+auxper3[4] = 100;
 
-for(int a = 0; a < powNb; a++){
-    for(int b = 0; b < powNb; b++){
-        for(int c = 0; c < powNb; c++){
+auxperi3[0] = 0;
+auxperi3[1] = 9;
+auxperi3[2] = 18;    
+
+for(a = 0; a < 5; a++){
+    for(b = 0; b < 5; b++){
+        for(c = 0; c < 5; c++){
 
             // Number of physical boxes
-
-            double s = auxper3[a] +  auxper2[b] + auxper[c];
-            ILF[s][0] = a - 2;
-            ILF[s][1] = b - 2;
-            ILF[s][2] = c - 2;
-            }
-
+            s = auxper3[a] +  auxper2[b] + auxper[c];
+            ILF0[s - 1] = a;
+            ILF1[s - 1] = b;
+            ILF2[s - 1] = c;
         }
     }
 }
 
-// Creating the initial configuration of all the physical lattices
+// // Creating the initial configuration of all the physical lattices
 
-for(int a = 0; a < numBoxes; a++){
-    for(int b = 0; b < numRealizations; b++){
-        for(int i = 0; i < numParticles; i++){
-            XI(a,b,i,0)= X(b,i,0) + ILF[a][0] * l;
-            XI(a,b,i,1)= X(b,i,1) + ILF[a][1] * l;
-            XI(a,b,i,2)= X(b,i,2) + ILF[a][2] * h;
-        }
-    }
-}
-
-// if(k.eq.1){
-// open(872,file='condicao_inicial_periodica.plt')
-// write(872,*)'Variables= "X1","X2","X3"'
-// do a=1,nb
-// do b=1,N
-// write(872,*) XI(a,1,b,1),XI(a,1,b,2),XI(a,1,b,3)
+// for(a = 0; a < nb; a++){
+//     for(b = 0; b < numRealizations; b++){
+//         for(c = 0; c < numParticles; c++){
+//             XI0[a + numRealizations * (b + numParticles * c)] = X0[b * numParticles + c] + ILF0[a] * l;
+//             XI1[a + numRealizations * (b + numParticles * c)] = X1[b * numParticles + c] + ILF1[a] * l;
+//             XI2[a + numRealizations * (b + numParticles * c)] = X2[b * numParticles + c] + ILF2[a] * h;            
+//         }
+//     }
 // }
 
-
 // Creating the lattice's indeces in the reciprocal space
-
-if(powNbr == 5.0){
-    auxper[0] = 1;
-    auxper[1] = 2;
-    auxper[2] = 3;
-    auxper[3] = 4;
-    auxper[4] = 5;
-
-    auxper2[0] = 0;
-    auxper2[1] = 5;
-    auxper2[2] = 10;
-    auxper2[3] = 15;
-    auxper2[4] = 20;
-
-    auxper3[0] = 0;
-    auxper3[1] = 25;
-    auxper3[2] = 50;
-    auxper3[3] = 75;
-    auxper3[4] = 100;
-    
-    int powRecBox = pow(numRecBoxes,(1.0/3.0));
-    for(int a = 0; a < powRecBox; a++){
-        for(int b = 0; b < powRecBox; b++){
-            for(int c = 0; c < powRecBox; c++){
-
-                // Number of reciprocal lattices
-                double s = auxper3[a] + auxper2[b] + auxper[c];            
-                ILR[s][0] = a - 3;
-                ILR[s][1] = b - 3;
-                ILR[s][2] = c - 3;
-            }
+for(a =  0; a < 3; a++){
+    for(b = 0; b < 3; b++){
+        for(c = 0; c < 3; c++){
+            // Number of reciprocal lattices
+            s = auxperi3[a] + auxperi2[b] + auxperi[c];  
+            cout << s << "\t";
+            ILR0[s - 1] = a;
+            ILR1[s - 1] = b;
+            ILR2[s - 1] = c;
         }
     }
-
-} else if(powNbr == 3.0){
-    auxper[0] = 1;
-    auxper[1] = 2;
-    auxper[2] = 3;
-
-    auxper2[0] = 0;
-    auxper2[1] = 3;
-    auxper2[2] = 6;
-
-    auxper3[0] = 0;
-    auxper3[1] = 9;
-    auxper3[2] = 18;
-    
-    for(int a = 0; a < (pow(nbr,(1.0/3.0))); a++){
-        for(int b = 0; b < (pow(nbr,(1.0/3.0))); b++){
-            for(int c = 0; c < (pow(nbr,(1.0/3.0))); c++){
-
-                // Number of reciprocal lattices
-                double s = auxper3[a] + auxper2[b] + auxper[c];
-                ILR[s][1] = a - 2;
-                ILR[s][2] = b - 2;
-                ILR[s][3] = c - 2;
-
-            }
-        }
-    }   
 }
 }
