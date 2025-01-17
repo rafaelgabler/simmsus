@@ -48,4 +48,4 @@ void greenTableFmagper5(int nGreen, double sig, double e, int f, double wave, do
 			double *cof04, double *cof14, double *cof06, double *cof16, double *cof08, double *cof18);
 
 
-#endif /* SRC_HEADERS_CONFIG_HPP_ */
+#endif /* SRC_HEADERS_GREENTABLE_HPP_ */

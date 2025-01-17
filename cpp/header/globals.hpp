@@ -31,7 +31,9 @@ extern double phi;
 extern bool periodicity;
 extern double *diam;
 extern double *betaVec;
-
-
-
+extern double *X0, *X1, *X2;
+extern double *U0, *U1, *U2;
+extern double *XI0, *XI1, *XI2;
+extern double *ILF0, *ILF1, *ILF2;
+extern double *ILR0, *ILR1, *ILR2;
 #endif /* SRC_HEADERS_GLOBALS_HPP_ */
