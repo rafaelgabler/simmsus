@@ -14,7 +14,7 @@
 #ifndef SRC_HEADERS_PARTICLEDISTRIBUTION_HPP_
 #define SRC_HEADERS_PARTICLEDISTRIBUTION_HPP_
 
-void particleDistribution(bool poliDispersidade, int rea, int numParticles, double *diam, double *beta);
+void particleDistribution(bool poliDispersidade, double *diam, double *beta);
 
 
 #endif /* SRC_HEADERS_PARTICLEDISTRIBUTION_HPP_ */
