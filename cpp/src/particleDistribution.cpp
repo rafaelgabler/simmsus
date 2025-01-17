@@ -14,7 +14,9 @@
 #include <math.h>
 #include <header/globals.hpp>
 #include <header/randomic.hpp>
-void particleDistribution(bool poliDispersidade, int numRealizations, int numParticles, double *diam, double *beta){
+#include <header/particleDistribution.hpp>
+
+void particleDistribution(bool poliDispersidade, double *diam, double *beta){
 
 
 if(poliDispersidade){
